@@ -10,6 +10,9 @@ flask = "*"
 requests = "*"
 werkzeug = "*"
 gunicorn = "*"
+wtforms = "*"
+flask-sqlalchemy = "*"
+cymysql = "*"
 
 [requires]
 python_version = "3.7"
