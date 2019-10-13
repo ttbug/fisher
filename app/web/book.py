@@ -2,8 +2,9 @@ from flask import jsonify
 
 from helper import is_isbn_or_key
 from fisher_book import FisherBook
+from . import web
 
-@app.route('/book/search/<q>/<page>')
+@web.route('/book/search/<q>/<page>')
 def search(q, page):
     '''
     q: 表示搜索关键字或isbn编号

@@ -1,4 +1,4 @@
-from http import HTTP
+from server import HTTP
 
 class FisherBook:
     isbn_url = "http://t.yushu.im/v2/book/isbn/{}"
