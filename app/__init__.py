@@ -9,7 +9,12 @@ def create_app():
     register_blueprint(app)
 
     db.init_app(app)
+    # 查看源码，这里的问题可以有三种解决方法，传入app
     db.create_all(app=app)
+
+    # with app.app_context():
+    #     db.create_all()
+        
     return app
 
 # 把蓝图注册到app
