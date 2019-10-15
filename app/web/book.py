@@ -4,6 +4,7 @@ from app.libs.helper import is_isbn_or_key
 from app.spider.fisher_book import FisherBook
 from . import web
 from app.forms.book import SearchForm
+from app.view_models.book import BookView
 
 @web.route('/book/search/')
 def search():
@@ -26,7 +27,9 @@ def search():
 
     if isbn_or_key == "isbn":
         result = FisherBook.search_by_isbn(q)
+        result = BookView.package_single(result, q)
     else:
         result = FisherBook.search_by_keyword(q, page)
+        result = BookView.package_collection(result, q)
 
     return jsonify(result)
