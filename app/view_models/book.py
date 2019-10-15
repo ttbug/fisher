@@ -1,6 +1,27 @@
 
-
 class BookView:
+    def __init__(self, book):
+        self.title = book['title'],
+        self.publisher = book['publisher'],
+        self.author = ','.join(book['author']),
+        self.price = book['price'],
+        self.summary = book['summary'] or '',
+        self.image = book['image'],
+        self.pages = book['pages'] or ''
+
+
+class BookViewCollection:
+    def __init__(self):
+        self.total = 0
+        self.books = []
+        self.keyword = ''
+
+    def fill(self, fisher, keyword):
+        self.total = fisher.total
+        self.keyword = keyword
+        self.books = [BookView(book) for book in fisher.books]
+
+class _BookView:
     @classmethod
     def package_single(cls, data, keyword):
         returned = {

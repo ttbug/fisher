@@ -1,10 +1,11 @@
+import json
 from flask import jsonify, request
 
 from app.libs.helper import is_isbn_or_key
 from app.spider.fisher_book import FisherBook
 from . import web
 from app.forms.book import SearchForm
-from app.view_models.book import BookView
+from app.view_models.book import BookViewCollection
 
 @web.route('/book/search/')
 def search():
@@ -16,6 +17,7 @@ def search():
     # q = request.args['q']
     # page = request.args['page']
     form = SearchForm(request.args)
+    books = BookViewCollection()
 
     if not form.validate():
         return jsonify(form.errors)
@@ -25,11 +27,13 @@ def search():
 
     isbn_or_key = is_isbn_or_key(q)
 
+    fisher_book = FisherBook()
     if isbn_or_key == "isbn":
-        result = FisherBook.search_by_isbn(q)
-        result = BookView.package_single(result, q)
+        fisher_book.search_by_isbn(q)
     else:
-        result = FisherBook.search_by_keyword(q, page)
-        result = BookView.package_collection(result, q)
+        fisher_book.search_by_keyword(q, page)
+    
+    books.fill(fisher_book, q)
 
-    return jsonify(result)
+    # lambda表达式把不能序列化的内容转换成字典
+    return json.dumps(books, default=lambda o: o.__dict__)
