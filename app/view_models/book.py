@@ -1,13 +1,21 @@
 
 class BookView:
     def __init__(self, book):
-        self.title = book['title'],
-        self.publisher = book['publisher'],
-        self.author = ','.join(book['author']),
-        self.price = book['price'],
-        self.summary = book['summary'] or '',
-        self.image = book['image'],
+        self.title = book['title']
+        self.publisher = book['publisher']
+        self.author = ','.join(book['author'])
+        self.price = book['price']
+        self.summary = book['summary'] or ''
+        self.image = book['image']
         self.pages = book['pages'] or ''
+        self.isbn = book['isbn']
+        self.pages = book['pages']
+        self.binding = book['binding']
+
+    @property
+    def intro(self):
+        datas = filter(lambda x: True if x else False, [self.author,self.publisher,self.price])
+        return '/'.join(datas)
 
 
 class BookViewCollection:
