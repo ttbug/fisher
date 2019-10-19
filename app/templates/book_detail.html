@@ -85,7 +85,7 @@
             <p class="description-font">{{ book.summary }}</p>
         </div>
     </div>
-    {% if gifts.total!= 0 and not has_in_gifts %}
+ {#   {% if gifts.total!= 0 and not has_in_gifts %}
         <div style="margin-top:30px;" class="row">
             <div class="col-md-3"><span class="description-title">向他们请求此书</span></div>
         </div>
@@ -124,7 +124,7 @@
                 </div>
             </div>
         {% endfor %}
-    {% endif %}
+    {% endif %}  #}
     <div class="remodal" data-remodal-id="modal" role="dialog"
          aria-labelledby="modal1Title" aria-describedby="modal1Desc"
          data-remodal-options="closeOnOutsideClick: false">
