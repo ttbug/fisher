@@ -11,6 +11,7 @@ class BookView:
         self.isbn = book['isbn']
         self.pages = book['pages']
         self.binding = book['binding']
+        self.pubdate = book['pubdate']
 
     @property
     def intro(self):
